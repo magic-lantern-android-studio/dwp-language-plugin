@@ -1,0 +1,28 @@
+{
+  parserClass="com.wizzer.dwp.parser.DwpParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Dwp"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.wizzer.dwp.psi"
+  psiImplPackage="com.wizzer.dwp.psi.impl"
+
+  elementTypeHolderClass="com.wizzer.dwp.psi.DwpTypes"
+  elementTypeClass="com.wizzer.dwp.psi.DwpElementType"
+  tokenTypeClass="com.wizzer.dwp.psi.DwpTokenType"
+
+  psiImplUtilClass="com.wizzer.dwp.psi.impl.DwpPsiImplUtil"
+}
+
+dwpFile ::= (property|COMMENT)*
+
+property ::= (KEY SEPARATOR VALUE?)|KEY {
+    pin=3
+    recoverWhile="recover_property"
+    mixin="com.wizzer.dwp.psi.impl.DwpNamedElementImpl"
+    implements="com.wizzer.dwp.psi.DwpNamedElement"
+    methods=[getKey getValue getName setName getNameIdentifier getPresentation]
+}
+
+private recover_property ::= !(KEY|SEPARATOR|COMMENT)

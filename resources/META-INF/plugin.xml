@@ -1,0 +1,63 @@
+<idea-plugin>
+  <id>com.wizzer.magiclantern.dwp.plugin.id</id>
+  <name>Digital Workprint</name>
+  <version>0.1</version>
+  <vendor email="msm@wizzerworks.com" url="http://www.wizzerworks.com">Wizzer Works</vendor>
+
+  <description><![CDATA[
+      Support for creating and managing Digital Workprints used with Magic Lantern applications
+      and tools.
+      ]]></description>
+
+  <change-notes><![CDATA[
+      Initial Proof-of-Concept. This POC does not actually implement the Digital Workprint language.
+      It is an effort to identify the Android Studio plugin extensions that need to be developed
+      in order to proceed.<br>
+      ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="107.105"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="com.wizzer.dwp.DwpFileTypeFactory"/>
+    <lang.parserDefinition language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpParserDefinition"/>
+    <lang.syntaxHighlighterFactory key="DigitalWorkprint"
+                                   language="DigitalWorkprint"
+                                   implementationClass="com.wizzer.dwp.DwpSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.wizzer.dwp.DwpColorSettingsPage"/>
+    <annotator language="JAVA" implementationClass="com.wizzer.dwp.DwpAnnotator"/>
+    <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.wizzer.dwp.DwpLineMarkerProvider"/>
+    <completion.contributor language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpCompletionContributor"/>
+    <psi.referenceContributor implementation="com.wizzer.dwp.DwpReferenceContributor"/>
+    <lang.findUsagesProvider language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpFindUsagesProvider"/>
+    <lang.refactoringSupport language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpRefactoringSupportProvider"/>
+    <lang.foldingBuilder language="JAVA" implementationClass="com.wizzer.dwp.DwpFoldingBuilder"/>
+    <gotoSymbolContributor implementation="com.wizzer.dwp.DwpChooseByNameContributor"/>
+    <lang.psiStructureViewFactory language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpStructureViewFactory"/>
+    <lang.formatter language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpFormattingModelBuilder"/>
+    <codeStyleSettingsProvider implementation="com.wizzer.dwp.DwpCodeStyleSettingsProvider"/>
+    <langCodeStyleSettingsProvider implementation="com.wizzer.dwp.DwpLanguageCodeStyleSettingsProvider"/>
+    <lang.commenter language="DigitalWorkprint" implementationClass="com.wizzer.dwp.DwpCommenter"/>
+    <todoIndexer filetype="DigitalWorkprint file" implementationClass="com.wizzer.dwp.DwpTodoIndexer"/>
+  </extensions>
+</idea-plugin>
